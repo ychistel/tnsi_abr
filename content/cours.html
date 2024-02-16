@@ -526,6 +526,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <span class="go">a2 est un arbre vide:</span>
 </pre></div>
 </div>
+<p>On ajoute la clé de valeur 5 à la racine de l’arbre.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a possède un noeud de clé 5:&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">)</span>
 <span class="go">a possède un noeud de clé 5: Noeud(5,None,None)</span>
@@ -534,6 +535,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-5.png" src="../_images/abr4-cle-5.png" />
 </figure>
+<p>On insére la clé de valeur 2 dans l’arbre. Elle se place dans le sous-arbre gauche.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,None),None)</span>
@@ -542,6 +544,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-2.png" src="../_images/abr4-cle-2.png" />
 </figure>
+<p>On insère ensuite la clé de valeur 3.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)</span>
@@ -550,6 +553,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-3.png" src="../_images/abr4-cle-3.png" />
 </figure>
+<p>On insère la clé de valeur 1.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)</span>
@@ -558,6 +562,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-1.png" src="../_images/abr4-cle-1.png" />
 </figure>
+<p>On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le sous-arbre droit.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))</span>
@@ -566,6 +571,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-7.png" src="../_images/abr4-cle-7.png" />
 </figure>
+<p>On insère la clé de valeur 6.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))</span>
@@ -574,6 +580,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-6.png" src="../_images/abr4-cle-6.png" />
 </figure>
+<p>On insère la clé de valeur 8.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))</span>
