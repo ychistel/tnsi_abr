@@ -219,48 +219,48 @@ a2 est un arbre vide:
 >>> print("a possède un noeud de clé 5:",a.racine.valeur)
 a possède un noeud de clé 5: Noeud(5,None,None)
 
-.. image:: ../img/abr4-cle-5.png
+.. figure:: ../img/abr4-cle-5.png
     :align: center
 
 >>> a = ajoute(2,a)
 >>> print(a)
 Noeud(5,Noeud(2,None,None),None)
 
-.. image:: ../img/abr4-cle-2.png
+.. figure:: ../img/abr4-cle-2.png
     :align: center
 
 >>> a = ajoute(3,a)
 >>> print(a)
 Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)
 
-.. image:: ../img/abr4-cle-3.png
+.. figure:: ../img/abr4-cle-3.png
     :align: center
 
 >>> a = ajoute(1,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)
 
-.. image:: ../img/abr4-cle-1.png
+.. figure:: ../img/abr4-cle-1.png
     :align: center
 
 >>> a2 = ajoute(7,a2)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))
 
-.. image:: ../img/abr4-cle-7.png
+.. figure:: ../img/abr4-cle-7.png
     :align: center
 
 >>> a = ajoute(6,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))
 
-.. image:: ../img/abr4-cle-6.png
+.. figure:: ../img/abr4-cle-6.png
     :align: center
 
 >>> a = ajoute(8,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))
 
-.. image:: ../img/abr4-cle-8.png
+.. figure:: ../img/abr4-cle-8.png
     :align: center
 
