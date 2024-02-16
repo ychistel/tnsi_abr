@@ -43,9 +43,11 @@ div.definition.admonition{border-color:#2b5b84;}
 div.definition > p.admonition-title{background-color:#badafa;color:#2b5b84;}
 div.definition > p.admonition-title::after{color:#2b5b84;content: "\e1fe";}
 
-div.code.admonition{border-color:#249b22;}
-div.code > p.admonition-title{background-color:#b3f962;color:rgb(39, 54, 47)}
-div.code > p.admonition-title::after{color:#404140;content: "\f121";}
+div.algo.admonition{border-color:#249b22;}
+div.algo > p.admonition-title{background-color:#b3f962;color:rgb(39, 54, 47)}
+div.algo > p.admonition-title::after{color:#404140;content: "\f121";}
+div.algo > dl dt{font-weight: normal;}
+div.algo > dl dd{margin-top:0px;margin-bottom: 0px;}
 
 div.propriete.admonition{border-color:#404140;}
 div.propriete > p.admonition-title{background-color:#d4d4d4;color:#404140;}

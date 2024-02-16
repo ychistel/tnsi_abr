@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=72851d7f" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=56ed18ac" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -438,15 +438,15 @@ celle mise en place pour les arbres binaires.</p>
 <p>Un arbre binaire de recherche est soit vide, soit constitué d’un noeud racine et de 2 arbres binaires de recherche
 gauche et droit éventuellement vides.</p>
 <p>La recherche d’une clé (valeur) dans un ABR s’appuie sur le parcours récursif de l’arbre. On en donne l’algorithme ci-dessous:</p>
-<div class="propriete admonition">
+<div class="algo admonition">
 <p class="admonition-title">Algorithme</p>
 <dl class="simple">
 <dt>si arbre vide:</dt><dd><p>valeur x non présente</p>
 </dd>
 <dt>sinon:</dt><dd><dl class="simple">
-<dt>si x &lt; valeur du Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre gauche</p>
+<dt>si x &lt; valeur du Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre gauche (<em>appel récursif</em>)</p>
 </dd>
-<dt>sinon si x &gt; valeur Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre droit</p>
+<dt>sinon si x &gt; valeur Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre droit (<em>appel récursif</em>)</p>
 </dd>
 <dt>sinon:</dt><dd><p>la valeur x est trouvée</p>
 </dd>
@@ -476,7 +476,7 @@ gauche et droit éventuellement vides.</p>
 <li><p>Sinon, on parcourt récursivement l’arbre jusqu’à la bonne position et on ajoute un Noeud avec la valeur donnée.</p></li>
 </ul>
 <p>En suivant ce processus, l’algorithme s’écrit:</p>
-<div class="propriete admonition">
+<div class="algo admonition">
 <p class="admonition-title">Algorithme</p>
 <dl class="simple">
 <dt>si arbre a est vide:</dt><dd><p>a.racine = Noeud(x)</p>
@@ -485,14 +485,14 @@ gauche et droit éventuellement vides.</p>
 <dt>si x &lt; valeur du noeud visité:</dt><dd><dl class="simple">
 <dt>si le noeud gauche est vide:</dt><dd><p>on ajoute un noeud gauche avec la valeur x</p>
 </dd>
-<dt>sinon:</dt><dd><p>on ajoute x dans arbre gauche</p>
+<dt>sinon:</dt><dd><p>on ajoute x dans arbre gauche (<em>appel récursif</em>)</p>
 </dd>
 </dl>
 </dd>
 <dt>si x &gt; valeur noeud visité:</dt><dd><dl class="simple">
 <dt>si le noeud droit est vide:</dt><dd><p>on ajoute un noeud droit avec la valeur x</p>
 </dd>
-<dt>sinon:</dt><dd><p>on ajoute x dans arbre droit</p>
+<dt>sinon:</dt><dd><p>on ajoute x dans arbre droit (<em>appel récursif</em>)</p>
 </dd>
 </dl>
 </dd>
@@ -501,7 +501,7 @@ gauche et droit éventuellement vides.</p>
 </dl>
 </div>
 <p>Avec l’implémentation en POO de notre ABR:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inserer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
         <span class="n">a</span><span class="o">.</span><span class="n">racine</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -509,25 +509,25 @@ gauche et droit éventuellement vides.</p>
             <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_gauche</span><span class="p">())</span>
+                <span class="n">inserer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_gauche</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">droit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_droit</span><span class="p">())</span>
+                <span class="n">inserer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_droit</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">a</span>
 </pre></div>
 </div>
 <p>Cette fonction insère des valeurs dans un ABR, y compris lorsque celui-ci est vide. En conséquence, cette fonction
 permet de créer des ABR et de les compléter facilement sans avoir à créer chaque Noeud.</p>
-<p>On crée un ABR avec la fonction ajoute:</p>
+<p>On crée un ABR avec la classe <code class="docutils literal notranslate"><span class="pre">Arbre</span></code>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Arbre</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a est un arbre vide:&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="p">)</span>
 <span class="go">a2 est un arbre vide:</span>
 </pre></div>
 </div>
-<p>On ajoute la clé de valeur 5 à la racine de l’arbre.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<p>On ajoute la clé de valeur 5 à la racine de l’arbre avec la fonction <code class="docutils literal notranslate"><span class="pre">inserer</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a possède un noeud de clé 5:&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">)</span>
 <span class="go">a possède un noeud de clé 5: Noeud(5,None,None)</span>
 </pre></div>
@@ -535,8 +535,8 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-5.png" src="../_images/abr4-cle-5.png" />
 </figure>
-<p>On insére la clé de valeur 2 dans l’arbre. Elle se place dans le sous-arbre gauche.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<p>On insère la clé de valeur 2 dans l’arbre. Elle se place dans le <strong>sous-arbre gauche</strong> de la racine.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,None),None)</span>
 </pre></div>
@@ -545,7 +545,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <img alt="../_images/abr4-cle-2.png" src="../_images/abr4-cle-2.png" />
 </figure>
 <p>On insère ensuite la clé de valeur 3.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)</span>
 </pre></div>
@@ -554,7 +554,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <img alt="../_images/abr4-cle-3.png" src="../_images/abr4-cle-3.png" />
 </figure>
 <p>On insère la clé de valeur 1.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)</span>
 </pre></div>
@@ -562,8 +562,8 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <figure class="align-center">
 <img alt="../_images/abr4-cle-1.png" src="../_images/abr4-cle-1.png" />
 </figure>
-<p>On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le sous-arbre droit.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span>
+<p>On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le <strong>sous-arbre droit</strong> de la racine.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))</span>
 </pre></div>
@@ -572,7 +572,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <img alt="../_images/abr4-cle-7.png" src="../_images/abr4-cle-7.png" />
 </figure>
 <p>On insère la clé de valeur 6.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))</span>
 </pre></div>
@@ -581,7 +581,7 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <img alt="../_images/abr4-cle-6.png" src="../_images/abr4-cle-6.png" />
 </figure>
 <p>On insère la clé de valeur 8.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">inserer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))</span>
 </pre></div>

@@ -132,15 +132,15 @@ gauche et droit éventuellement vides.
 La recherche d'une clé (valeur) dans un ABR s'appuie sur le parcours récursif de l'arbre. On en donne l'algorithme ci-dessous:
 
 .. admonition:: Algorithme
-    :class: propriete
+    :class: algo
 
     si arbre vide:
         valeur x non présente
     sinon:
         si x < valeur du Noeud visité:
-            on recherche la valeur x dans l'arbre gauche
+            on recherche la valeur x dans l'arbre gauche (*appel récursif*)
         sinon si x > valeur Noeud visité:
-            on recherche la valeur x dans l'arbre droit
+            on recherche la valeur x dans l'arbre droit (*appel récursif*)
         sinon:
             la valeur x est trouvée
 
@@ -170,7 +170,7 @@ On donne ci-après le processus pour ajouter une clé (valeur) dans un ABR:
 En suivant ce processus, l'algorithme s'écrit:
 
 .. admonition:: Algorithme
-    :class: propriete
+    :class: algo
 
     si arbre a est vide:
         a.racine = Noeud(x)
@@ -179,18 +179,18 @@ En suivant ce processus, l'algorithme s'écrit:
             si le noeud gauche est vide:
                 on ajoute un noeud gauche avec la valeur x
             sinon:
-                on ajoute x dans arbre gauche
+                on ajoute x dans arbre gauche (*appel récursif*)
         si x > valeur noeud visité:
             si le noeud droit est vide:
                 on ajoute un noeud droit avec la valeur x
             sinon:
-                on ajoute x dans arbre droit
+                on ajoute x dans arbre droit (*appel récursif*)
 
 Avec l'implémentation en POO de notre ABR:
 
 .. code:: python
 
-    def ajoute(x,a):
+    def inserer(x,a):
         if a.est_vide():
             a.racine = Noeud(x)
         else:
@@ -198,35 +198,35 @@ Avec l'implémentation en POO de notre ABR:
                 if a.racine.gauche is None:
                     a.racine.gauche = Noeud(x)
                 else:
-                    ajoute(x,a.fils_gauche())
+                    inserer(x,a.fils_gauche())
             if x > a.racine.valeur:
                 if a.racine.droit is None:
                     a.racine.droit = Noeud(x)
                 else:
-                    ajoute(x,a.fils_droit())
+                    inserer(x,a.fils_droit())
         return a
 
 Cette fonction insère des valeurs dans un ABR, y compris lorsque celui-ci est vide. En conséquence, cette fonction
 permet de créer des ABR et de les compléter facilement sans avoir à créer chaque Noeud.
 
-On crée un ABR avec la fonction ajoute:
+On crée un ABR avec la classe ``Arbre``:
 
 >>> a = Arbre()
 >>> print("a est un arbre vide:",a.racine)
 a2 est un arbre vide:
 
-On ajoute la clé de valeur 5 à la racine de l'arbre.
+On ajoute la clé de valeur 5 à la racine de l'arbre avec la fonction ``inserer``.
 
->>> a = ajoute(5,a)
+>>> a = inserer(5,a)
 >>> print("a possède un noeud de clé 5:",a.racine.valeur)
 a possède un noeud de clé 5: Noeud(5,None,None)
 
 .. figure:: ../img/abr4-cle-5.png
     :align: center 
 
-On insére la clé de valeur 2 dans l'arbre. Elle se place dans le sous-arbre gauche.
+On insère la clé de valeur 2 dans l'arbre. Elle se place dans le **sous-arbre gauche** de la racine.
 
->>> a = ajoute(2,a)
+>>> a = inserer(2,a)
 >>> print(a)
 Noeud(5,Noeud(2,None,None),None)
 
@@ -235,7 +235,7 @@ Noeud(5,Noeud(2,None,None),None)
 
 On insère ensuite la clé de valeur 3.
 
->>> a = ajoute(3,a)
+>>> a = inserer(3,a)
 >>> print(a)
 Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)
 
@@ -244,16 +244,16 @@ Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)
 
 On insère la clé de valeur 1.
 
->>> a = ajoute(1,a)
+>>> a = inserer(1,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)
 
 .. figure:: ../img/abr4-cle-1.png
     :align: center
 
-On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le sous-arbre droit.
+On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le **sous-arbre droit** de la racine.
 
->>> a2 = ajoute(7,a2)
+>>> a2 = inserer(7,a2)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))
 
@@ -262,7 +262,7 @@ Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))
 
 On insère la clé de valeur 6.
 
->>> a = ajoute(6,a)
+>>> a = inserer(6,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))
 
@@ -271,7 +271,7 @@ Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None
 
 On insère la clé de valeur 8.
 
->>> a = ajoute(8,a)
+>>> a = inserer(8,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))
 

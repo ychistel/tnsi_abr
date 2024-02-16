@@ -19,4 +19,4 @@ Arbre binaire de recherche
    content/cours.rst
    content/exercice.rst
    content/exercice_2.rst
-   .. content/exercice_bac_1.rst
+
