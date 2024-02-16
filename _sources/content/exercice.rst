@@ -29,7 +29,7 @@ Exercice 2
 
 #. On donne l’ABR ci-dessous:
 
-   .. image:: ../img/fig_1_exercice.png
+   .. figure:: ../img/exercice_fig1.png
       :align: center
       :width: 240
 

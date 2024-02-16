@@ -531,43 +531,57 @@ permet de créer des ABR et de les compléter facilement sans avoir à créer ch
 <span class="go">a possède un noeud de clé 5: Noeud(5,None,None)</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-5.png" class="align-center" src="../_images/abr4-cle-5.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-5.png" src="../_images/abr4-cle-5.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,None),None)</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-2.png" class="align-center" src="../_images/abr4-cle-2.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-2.png" src="../_images/abr4-cle-2.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-3.png" class="align-center" src="../_images/abr4-cle-3.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-3.png" src="../_images/abr4-cle-3.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-1.png" class="align-center" src="../_images/abr4-cle-1.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-1.png" src="../_images/abr4-cle-1.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-7.png" class="align-center" src="../_images/abr4-cle-7.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-7.png" src="../_images/abr4-cle-7.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-6.png" class="align-center" src="../_images/abr4-cle-6.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-6.png" src="../_images/abr4-cle-6.png" />
+</figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))</span>
 </pre></div>
 </div>
-<img alt="../_images/abr4-cle-8.png" class="align-center" src="../_images/abr4-cle-8.png" />
+<figure class="align-center">
+<img alt="../_images/abr4-cle-8.png" src="../_images/abr4-cle-8.png" />
+</figure>
 </section>
 </section>
 

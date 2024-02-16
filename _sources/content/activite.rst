@@ -17,7 +17,7 @@ Partie 1
 
 #.  Les arbres ci-dessous sont-ils des arbres binaires de recherche (ABR) ? Justifier votre réponse.
 
-    .. figure:: ../img/fig_1_activite.png
+    .. figure:: ../img/activite_fig1.png
         :align: center
     
 #.  Un arbre binaire de recherche contient les nombres entiers de 1 à 10. Représenter dans chacun des cas suivants cet arbre binaire sachant que la racine est de hauteur 0 et que:
