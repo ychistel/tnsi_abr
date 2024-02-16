@@ -215,12 +215,16 @@ On crée un ABR avec la fonction ajoute:
 >>> print("a est un arbre vide:",a.racine)
 a2 est un arbre vide:
 
+On ajoute la clé de valeur 5 à la racine de l'arbre.
+
 >>> a = ajoute(5,a)
 >>> print("a possède un noeud de clé 5:",a.racine.valeur)
 a possède un noeud de clé 5: Noeud(5,None,None)
 
 .. figure:: ../img/abr4-cle-5.png
-    :align: center
+    :align: center 
+
+On insére la clé de valeur 2 dans l'arbre. Elle se place dans le sous-arbre gauche.
 
 >>> a = ajoute(2,a)
 >>> print(a)
@@ -229,12 +233,16 @@ Noeud(5,Noeud(2,None,None),None)
 .. figure:: ../img/abr4-cle-2.png
     :align: center
 
+On insère ensuite la clé de valeur 3.
+
 >>> a = ajoute(3,a)
 >>> print(a)
 Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)
 
 .. figure:: ../img/abr4-cle-3.png
     :align: center
+
+On insère la clé de valeur 1.
 
 >>> a = ajoute(1,a)
 >>> print(a)
@@ -243,12 +251,16 @@ Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)
 .. figure:: ../img/abr4-cle-1.png
     :align: center
 
+On insère la clé de valeur 7. Cette clé est supérieure à la clé de la racine, donc elle est insérée dans le sous-arbre droit.
+
 >>> a2 = ajoute(7,a2)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))
 
 .. figure:: ../img/abr4-cle-7.png
     :align: center
+
+On insère la clé de valeur 6.
 
 >>> a = ajoute(6,a)
 >>> print(a)
@@ -257,10 +269,11 @@ Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None
 .. figure:: ../img/abr4-cle-6.png
     :align: center
 
+On insère la clé de valeur 8.
+
 >>> a = ajoute(8,a)
 >>> print(a)
 Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))
 
 .. figure:: ../img/abr4-cle-8.png
     :align: center
-
