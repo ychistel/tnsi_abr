@@ -1,5 +1,3 @@
-.. TNSI
-
 Activité découverte : ABR
 =========================
 
