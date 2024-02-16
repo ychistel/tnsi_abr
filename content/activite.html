@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Activité découverte : ABR &#8212; NSI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=72851d7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/translations.js?v=d99ca74e"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/activite';</script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Arbre binaire de recherche (ABR)" href="cours.html" />
+    <link rel="prev" title="Arbre binaire de recherche" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NSI</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Activité découverte : ABR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cours.html">Arbre binaire de recherche (ABR)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercice.html">Exercices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercice_2.html">Exercices type bac</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/activite.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Activité découverte : ABR</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-1">Partie 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-2">Partie 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-3">Partie 3</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="activite-decouverte-abr">
+<h1>Activité découverte : ABR<a class="headerlink" href="#activite-decouverte-abr" title="Link to this heading">#</a></h1>
+<p>Un arbre binaire de recherche (ABR) est un arbre binaire dont les noeuds contiennent des clés (valeurs) que l’on peut comparer comme des nombres entiers ou les lettres de l’alphabet.</p>
+<p>Un ABR respecte les règles suivantes:</p>
+<ol class="arabic simple">
+<li><p>Pour un noeud donné:</p>
+<ul class="simple">
+<li><p>Toutes les clés situées dans l’arbre fils gauche sont inférieures à la clé du noeud ;</p></li>
+<li><p>Toutes les clés situées dans l’arbre fils droit sont supérieures à la clé du noeud ;</p></li>
+</ul>
+</li>
+<li><p>Toutes les clés d’un ABR sont distinctes, pas de doublon.</p></li>
+</ol>
+<section id="partie-1">
+<h2>Partie 1<a class="headerlink" href="#partie-1" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Les arbres ci-dessous sont-ils des arbres binaires de recherche (ABR) ? Justifier votre réponse.</p>
+<img alt="img/fig_1_activite.png" class="align-center" src="img/fig_1_activite.png" />
+</li>
+<li><p>Un arbre binaire de recherche contient les nombres entiers de 1 à 10. Représenter dans chacun des cas suivants cet arbre binaire sachant que la racine est de hauteur 0 et que:</p>
+<ol class="loweralpha simple">
+<li><p>la racine de l’arbre est le nombre 5 et sa hauteur est minimale.</p></li>
+<li><p>la racine de l’arbre est le nombre 3 et sa hauteur est 3.</p></li>
+<li><p>la racine de l’arbre est le nombre 9 et la hauteur est maximale.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="partie-2">
+<h2>Partie 2<a class="headerlink" href="#partie-2" title="Link to this heading">#</a></h2>
+<p>On reprend l’implémentation des arbres binaires en POO. On dispose de deux classes pour implémenter les ABR: la classe <code class="docutils literal notranslate"><span class="pre">Arbre</span></code> et la classe <code class="docutils literal notranslate"><span class="pre">Noeud</span></code>.</p>
+<ul>
+<li><p>Tout objet créé avec la classe <code class="docutils literal notranslate"><span class="pre">Arbre</span></code> a un attribut racine.</p>
+<ul class="simple">
+<li><p>L’attribut racine initialisé à <strong>None</strong> définit un arbre vide;</p></li>
+<li><p>Pour un arbre non vide, la racine prend la valeur d’un objet Noeud .</p></li>
+</ul>
+<p>Nous avons les méthodes des arbres binaires:</p>
+<ul class="simple">
+<li><p>La méthode est_vide() renvoie le booléen <code class="docutils literal notranslate"><span class="pre">True</span></code> pour un arbre vide et <code class="docutils literal notranslate"><span class="pre">False</span></code> pour un arbre non vide.</p></li>
+<li><p>La méthode fils_gauche() renvoie l’arbre gauche d’un Noeud.</p></li>
+<li><p>La méthode fils_droit() renvoie l’arbre droit d’un Noeud.</p></li>
+</ul>
+</li>
+<li><p>La classe Noeud contient 3 attributs : valeur, gauche et droit.</p>
+<ul class="simple">
+<li><p>L’attribut valeur contient la valeur d’un noeud de l’arbre;</p></li>
+<li><p>Les attributs gauche et droit représentent des arbres binaires qui sont des objets Noeud éventuellement vides.</p></li>
+</ul>
+<p>Elle ne contient pas de méthode particulière en dehors de l’affichage.</p>
+</li>
+</ul>
+<ol class="arabic simple">
+<li><p>Soit <span class="math notranslate nohighlight">\(a\)</span> un ABR tel que <code class="docutils literal notranslate"><span class="pre">a=(5,</span> <span class="pre">(3,</span> <span class="pre">None,</span> <span class="pre">None),</span> <span class="pre">(6,</span> <span class="pre">None,</span> <span class="pre">None))</span></code>.</p>
+<ol class="loweralpha simple">
+<li><p>Représenter schématiquement l’ABR <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p>On ajoute dans cet ABR le noeud de valeur <span class="math notranslate nohighlight">\(4\)</span>. Compléter la description récursive de <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+</ol>
+</li>
+<li><p>On définit avec l’implémentation EN POO notre ABR en python.</p>
+<ol class="loweralpha simple">
+<li><p>Quelle instruction Python construit l’arbre a ?</p></li>
+<li><p>Soit b = a.fils_gauche() ? Quel est le type de la variable b ?</p></li>
+<li><p>Que renvoie b.est_vide() ?</p></li>
+<li><p>Ajouter la valeur <span class="math notranslate nohighlight">\(4\)</span> dans l’arbre <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="partie-3">
+<h2>Partie 3<a class="headerlink" href="#partie-3" title="Link to this heading">#</a></h2>
+<p>Dans cette partie, nous allons créer deux fonctions pour <strong>rechercher</strong> et <strong>insérer</strong> une valeur dans un ABR.</p>
+<ol class="arabic">
+<li><p>La recherche d’une valeur dans un ABR nécessite de parcourir l’arbre jusqu’à trouver la valeur si elle est présente. Le parcours d’un arbre est récursif, donc la recherche d’une valeur s’appuie sur la récursivité.</p>
+<p>On donne ci-après l’algorithme de recherche d’une valeur <code class="docutils literal notranslate"><span class="pre">x</span></code> dans un arbre:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>si arbre vide:
+    valeur de x non présente
+sinon:
+    si x &lt; valeur du Noeud visité:
+        on renvoie la recherche de x dans l&#39;arbre gauche
+    sinon si x &gt; valeur Noeud visité:
+        on renvoie la recherche de x dans l&#39;arbre droit
+    sinon:
+        valeur de x présente
+</pre></div>
+</div>
+<p>a. Écrire la fonction <strong>appartient</strong> qui prend en paramètre la valeur <span class="math notranslate nohighlight">\(x\)</span> cherchée et un arbre binaire de
+recherche. Cette fonction est de type booléen, elle renvoie <strong>True</strong> si la valeur est dans l’arbre, <strong>False</strong> sinon.</p>
+<ol class="loweralpha simple" start="2">
+<li><p>Vérifier votre fonction et votre méthode avec l’arbre a créé dans la première partie.</p></li>
+</ol>
+</li>
+<li><p>L’ajout d’une valeur dans un ABR nécessite aussi le parcours récursif de l’arbre et l’ajout d’un Noeud .</p>
+<p>On donne ci-après l’algorithme de l’ajout d’une valeur <code class="docutils literal notranslate"><span class="pre">x</span></code> dans un arbre <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>si arbre a est vide:
+    a = Arbre(x)
+sinon:
+    si x &lt; valeur du noeud visité:
+        si le noeud gauche vide:
+            noeud gauche = Noeud(x)
+        sinon:
+            on ajoute x dans arbre gauche
+    si x &gt; valeur noeud visité:
+        si le droit vide:
+            noeud droit = Noeud(x)
+        sinon:
+            on ajoute x dans arbre droit
+renvoi de arbre a
+</pre></div>
+</div>
+<ol class="loweralpha simple">
+<li><p>Écrire la fonction <strong>ajoute</strong> qui prend en paramètre la valeur <code class="docutils literal notranslate"><span class="pre">x</span></code> à ajouter et un arbre binaire de recherche. Elle renvoie un arbre binaire avec la valeur ajoutée.</p></li>
+<li><p>Vérifier votre fonction avec l’arbre a créé dans la première partie en y ajoutant différentes valeurs.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Arbre binaire de recherche</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cours.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Arbre binaire de recherche (ABR)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-1">Partie 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-2">Partie 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partie-3">Partie 3</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Yannick Chistel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023,Yannick Chistel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

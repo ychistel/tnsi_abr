@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Arbre binaire de recherche (ABR) &#8212; NSI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=72851d7f" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=72dce1d2"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/translations.js?v=d99ca74e"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/cours';</script>
+    <script src="../_static/custom.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Exercices" href="exercice.html" />
+    <link rel="prev" title="Activité découverte : ABR" href="activite.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Haut de page
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NSI</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Recherche</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activite.html">Activité découverte : ABR</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Arbre binaire de recherche (ABR)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercice.html">Exercices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercice_2.html">Exercices type bac</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/cours.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Arbre binaire de recherche (ABR)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-en-python">Implémentation en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-d-une-cle-dans-un-abr">Recherche d’une clé dans un ABR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajouter-une-cle-dans-un-abr">Ajouter une clé dans un ABR</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="arbre-binaire-de-recherche-abr">
+<h1>Arbre binaire de recherche (ABR)<a class="headerlink" href="#arbre-binaire-de-recherche-abr" title="Link to this heading">#</a></h1>
+<div class="definition admonition">
+<p class="admonition-title">Définition</p>
+<p>Un <strong>arbre binaire de recherche</strong> est un arbre binaire tel que pour un noeud fixé de l’arbre, tout noeud de son arbre fils gauche lui est <strong>strictement inférieur</strong> et tout noeud de son arbre fils droit lui est <strong>strictement supérieur</strong>.</p>
+<p>Les valeurs d’un ABR sont appelées des <strong>clés</strong>. Les clés sont distinctes, l’arbre ne possède aucun doublon.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Prudence</p>
+<p>Un même ensemble de données peut être représenté par différents arbres binaires de recherche. Certains ABR auront une structure proche d’un arbre binaire complet ou bien tassé. On dit que ces ABR sont équilibrés.</p>
+</div>
+<p>Prenons l’exemple d’un arbre binaire de recherche (ABR) donné ci-dessous.</p>
+<ul class="simple">
+<li><p>La racine de l’arbre a pour clé <span class="math notranslate nohighlight">\(5\)</span>;</p></li>
+<li><p>L’arbre fils gauche contient les clés <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(3\)</span> et <span class="math notranslate nohighlight">\(4\)</span> inférieures à <span class="math notranslate nohighlight">\(5\)</span>;</p></li>
+<li><p>L’arbre fils droit contient les clés <span class="math notranslate nohighlight">\(6\)</span>, <span class="math notranslate nohighlight">\(8\)</span> et <span class="math notranslate nohighlight">\(9\)</span> supérieures à <span class="math notranslate nohighlight">\(5\)</span>.</p></li>
+</ul>
+<img alt="../_images/abr1.png" class="align-center" src="../_images/abr1.png" />
+<ul class="simple">
+<li><p>Le noeud de valeur <code class="docutils literal notranslate"><span class="pre">4</span></code> se situe dans l’arbre fils gauche du noeud de clé égale à <code class="docutils literal notranslate"><span class="pre">5</span></code> puisque <span class="math notranslate nohighlight">\(4 &lt; 5\)</span>; Il est dans l’arbre fils droit du noeud de clé égale à <code class="docutils literal notranslate"><span class="pre">3</span></code> puisque <span class="math notranslate nohighlight">\(4 &gt; 3\)</span>.</p></li>
+<li><p>Le noeud de valeur <code class="docutils literal notranslate"><span class="pre">6</span></code> se situe dans l’arbre fils droit de la racine de clé <code class="docutils literal notranslate"><span class="pre">5</span></code> puisque <span class="math notranslate nohighlight">\(6 &gt; 5\)</span>; Il est dans un arbre fils gauche du noeud de clé égale à <code class="docutils literal notranslate"><span class="pre">8</span></code> puisque <span class="math notranslate nohighlight">\(6 &lt; 8\)</span>.</p></li>
+<li><p>L’arbre binaire est équilibré. D’autres ABR peuvent être construits avec les mêmes données comme le montre les figures ci-dessous.</p></li>
+</ul>
+<figure class="align-center" id="id1">
+<img alt="abr2.png" src="../_images/abr2.png" />
+<figcaption>
+<p><span class="caption-text">arbre déséquilibré à gauche</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<img alt="abr3.png" src="../_images/abr3.png" />
+<figcaption>
+<p><span class="caption-text">arbre déséquilibré à droite</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="implementation-en-python">
+<h2>Implémentation en Python<a class="headerlink" href="#implementation-en-python" title="Link to this heading">#</a></h2>
+<p>L’implémentation d’un arbre binaire peut se faire avec des listes,
+dictionnaires ou par programmation objet.</p>
+<p>Le choix de la programmation objet pour implémenter nos ABR reprend
+celle mise en place pour les arbres binaires.</p>
+<ul class="simple">
+<li><p>La classe <strong>Noeud</strong> instancie un objet Noeud avec 3 attributs: <code class="docutils literal notranslate"><span class="pre">valeur</span></code>, <code class="docutils literal notranslate"><span class="pre">gauche</span></code>, <code class="docutils literal notranslate"><span class="pre">droit</span></code>;</p></li>
+<li><p>La classe <strong>Arbre</strong> instancie un objet Arbre avec un seul attribut : <code class="docutils literal notranslate"><span class="pre">racine</span></code>. La racine est un objet Noeud éventuellement vide.</p></li>
+</ul>
+<p>Le code python de cette implémentation est le suivant:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Noeud</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">,</span> <span class="n">gauche</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">droit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># instancie, crée un objet Noeud avec ces trois attributs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valeur</span> <span class="o">=</span> <span class="n">valeur</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">droit</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># crée une chaine de caratères pour afficher un objet Noeud avec la commande print</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valeur</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Noeud(&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valeur</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">droit</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)&quot;</span>
+
+<span class="k">class</span> <span class="nc">Arbre</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">racine</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># instancie, crée un objet Arbre avec un seul attribut dont la valeur est un objet Noeud.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">racine</span><span class="p">,</span><span class="n">Noeud</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">racine</span> <span class="o">=</span> <span class="n">racine</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">racine</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">racine</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># appelle la méthode de l&#39;objet Noeud pour être affiché</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">racine</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">est_vide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># teste si l&#39;arbre est vide</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span> <span class="ow">is</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">fils_gauche</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># renvoie le contenu d&#39;un noeud fils gauche en arbre</span>
+        <span class="k">return</span> <span class="n">Arbre</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">gauche</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fils_droit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># renvoie le contenu d&#39;un noeud fils droit en arbre</span>
+        <span class="k">return</span> <span class="n">Arbre</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">droit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On se propose de créer l’arbre binaire de recherche, équilibré, de la première figure.</p>
+<p>On crée les feuilles de l’ABR:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_2</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_4</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_6</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_9</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On crée le noeud gauche; sa racine a pour valeur 3, à sa gauche c’est le noeud <code class="docutils literal notranslate"><span class="pre">n_2</span></code> et sa droite le noeud <code class="docutils literal notranslate"><span class="pre">n_4</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_g</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">n_2</span><span class="p">,</span><span class="n">n_4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On crée le noeud droit; sa racine a pour valeur 8, à sa gauche c’est le noeud <code class="docutils literal notranslate"><span class="pre">n_6</span></code> et à sa droite le noeud <code class="docutils literal notranslate"><span class="pre">n_9</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n_d</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">n_6</span><span class="p">,</span><span class="n">n_9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On crée le noeud qui contient tous les autres noeuds:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">n_g</span><span class="p">,</span><span class="n">n_d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On crée notre objet <code class="docutils literal notranslate"><span class="pre">Arbre</span></code> dont l’attribut <code class="docutils literal notranslate"><span class="pre">racine</span></code> a pour valeur le noeud <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span> <span class="n">Arbre</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On obtient l’arbre binaire de recherche suivant:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">Noeud(5,</span> <span class="pre">Noeud(3,</span> <span class="pre">Noeud(2,</span> <span class="pre">None,</span> <span class="pre">None),</span> <span class="pre">Noeud(4,</span> <span class="pre">None,</span> <span class="pre">None)),</span> <span class="pre">Noeud(8,</span> <span class="pre">Noeud(6,</span> <span class="pre">None,</span> <span class="pre">None),</span> <span class="pre">Noeud(9,</span> <span class="pre">None,</span> <span class="pre">None)))</span></code></p>
+</section>
+<section id="recherche-d-une-cle-dans-un-abr">
+<h2>Recherche d’une clé dans un ABR<a class="headerlink" href="#recherche-d-une-cle-dans-un-abr" title="Link to this heading">#</a></h2>
+<p>Un arbre binaire de recherche est soit vide, soit constitué d’un noeud racine et de 2 arbres binaires de recherche
+gauche et droit éventuellement vides.</p>
+<p>La recherche d’une clé (valeur) dans un ABR s’appuie sur le parcours récursif de l’arbre. On en donne l’algorithme ci-dessous:</p>
+<div class="propriete admonition">
+<p class="admonition-title">Algorithme</p>
+<dl class="simple">
+<dt>si arbre vide:</dt><dd><p>valeur x non présente</p>
+</dd>
+<dt>sinon:</dt><dd><dl class="simple">
+<dt>si x &lt; valeur du Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre gauche</p>
+</dd>
+<dt>sinon si x &gt; valeur Noeud visité:</dt><dd><p>on recherche la valeur x dans l’arbre droit</p>
+</dd>
+<dt>sinon:</dt><dd><p>la valeur x est trouvée</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<p>Avec l’implémentation en python des ABR, cet algorithme s’écrit avec une fonction récursive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">recherche</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recherche</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_gauche</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">recherche</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_droit</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="ajouter-une-cle-dans-un-abr">
+<h2>Ajouter une clé dans un ABR<a class="headerlink" href="#ajouter-une-cle-dans-un-abr" title="Link to this heading">#</a></h2>
+<p>On donne ci-après le processus pour ajouter une clé (valeur) dans un ABR:</p>
+<ul class="simple">
+<li><p>Si l’arbre est vide, on crée un Noeud avec la valeur à ajouter et on l’affecte à la racine de l’arbre;</p></li>
+<li><p>Sinon, on parcourt récursivement l’arbre jusqu’à la bonne position et on ajoute un Noeud avec la valeur donnée.</p></li>
+</ul>
+<p>En suivant ce processus, l’algorithme s’écrit:</p>
+<div class="propriete admonition">
+<p class="admonition-title">Algorithme</p>
+<dl class="simple">
+<dt>si arbre a est vide:</dt><dd><p>a.racine = Noeud(x)</p>
+</dd>
+<dt>sinon:</dt><dd><dl class="simple">
+<dt>si x &lt; valeur du noeud visité:</dt><dd><dl class="simple">
+<dt>si le noeud gauche est vide:</dt><dd><p>on ajoute un noeud gauche avec la valeur x</p>
+</dd>
+<dt>sinon:</dt><dd><p>on ajoute x dans arbre gauche</p>
+</dd>
+</dl>
+</dd>
+<dt>si x &gt; valeur noeud visité:</dt><dd><dl class="simple">
+<dt>si le noeud droit est vide:</dt><dd><p>on ajoute un noeud droit avec la valeur x</p>
+</dd>
+<dt>sinon:</dt><dd><p>on ajoute x dans arbre droit</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<p>Avec l’implémentation en POO de notre ABR:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">racine</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_gauche</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">droit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ajoute</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">fils_droit</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>Cette fonction insère des valeurs dans un ABR, y compris lorsque celui-ci est vide. En conséquence, cette fonction
+permet de créer des ABR et de les compléter facilement sans avoir à créer chaque Noeud.</p>
+<p>On crée un ABR avec la fonction ajoute:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Arbre</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a est un arbre vide:&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="p">)</span>
+<span class="go">a2 est un arbre vide:</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a possède un noeud de clé 5:&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">racine</span><span class="o">.</span><span class="n">valeur</span><span class="p">)</span>
+<span class="go">a possède un noeud de clé 5: Noeud(5,None,None)</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-5.png" class="align-center" src="../_images/abr4-cle-5.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,None,None),None)</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-2.png" class="align-center" src="../_images/abr4-cle-2.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,None,Noeud(3,None,None)),None)</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-3.png" class="align-center" src="../_images/abr4-cle-3.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),None)</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-1.png" class="align-center" src="../_images/abr4-cle-1.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a2</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,None,None))</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-7.png" class="align-center" src="../_images/abr4-cle-7.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),None))</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-6.png" class="align-center" src="../_images/abr4-cle-6.png" />
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ajoute</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">Noeud(5,Noeud(2,Noeud(1,None,None),Noeud(3,None,None)),Noeud(7,Noeud(6,None,None),Noeud(8,None,None)))</span>
+</pre></div>
+</div>
+<img alt="../_images/abr4-cle-8.png" class="align-center" src="../_images/abr4-cle-8.png" />
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="activite.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Activité découverte : ABR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercice.html"
+       title="page suivante">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">suivant</p>
+        <p class="prev-next-title">Exercices</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-en-python">Implémentation en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recherche-d-une-cle-dans-un-abr">Recherche d’une clé dans un ABR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajouter-une-cle-dans-un-abr">Ajouter une clé dans un ABR</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Yannick Chistel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023,Yannick Chistel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
